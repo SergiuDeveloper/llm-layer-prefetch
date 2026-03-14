@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "llm-layer-prefetch"
+version = "1.0.0"
+description = "Stream transformer blocks layer-by-layer from disk to GPU with a pipelined prefetch queue (disk → CPU RAM → pinned RAM → GPU)."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+keywords = ["llm", "inference", "streaming", "offloading", "pytorch", "cuda", "safetensors"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "tqdm>=4.0",
+    "torch",
+]
+
+[project.optional-dependencies]
+examples = [
+    "transformers>=4.40",
+    "huggingface_hub>=0.23",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/layer_streamer"]
